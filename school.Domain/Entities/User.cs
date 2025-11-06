@@ -9,6 +9,7 @@ public class User
 
     public enum UserRole
     {
+        Admin,
         Student,
         Teacher
     }
