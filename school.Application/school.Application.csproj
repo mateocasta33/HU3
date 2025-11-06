@@ -2,7 +2,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\school.Domain\school.Domain.csproj" />
-    <ProjectReference Include="..\school.Infrastructure\school.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <PropertyGroup>
