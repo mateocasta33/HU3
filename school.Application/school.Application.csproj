@@ -2,11 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\school.Domain\school.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\school.Infrastructure\school.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
