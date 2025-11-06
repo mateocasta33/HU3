@@ -13,6 +13,6 @@ public class Student : User
         FullName = fullName;
         Grade = grade;
         EnrollmentDate = DateTime.Now;
-        Role = UserRole.Student; 
+        Role = UserRole.Student;
     }
 }
