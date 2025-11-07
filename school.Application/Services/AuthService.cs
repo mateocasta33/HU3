@@ -1,6 +1,8 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using school.Application.Dtos;
@@ -20,26 +22,56 @@ namespace school.Application.Services
             _configuration = configuration;
         }
 
-        public async Task<string> RegisterAsync(RegisterDto dto)
+        public async Task<User> RegisterAsync(RegisterDto dto)
         {
+            if (dto == null)
+                throw new ArgumentNullException(nameof(dto), "El objeto de registro no puede ser nulo.");
+
+            if (string.IsNullOrWhiteSpace(dto.Username))
+                throw new ArgumentException("El nombre de usuario es obligatorio.", nameof(dto.Username));
+
+            if (string.IsNullOrWhiteSpace(dto.Email))
+                throw new ArgumentException("El correo electrónico es obligatorio.", nameof(dto.Email));
+
+            if (string.IsNullOrWhiteSpace(dto.Password))
+                throw new ArgumentException("La contraseña es obligatoria.", nameof(dto.Password));
+
+            if (string.IsNullOrWhiteSpace(dto.Role))
+                throw new ArgumentException("El rol es obligatorio.", nameof(dto.Role));
+
+            if (!Regex.IsMatch(dto.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                throw new ArgumentException("El correo electrónico no tiene un formato válido.", nameof(dto.Email));
+
+            if (dto.Password.Length < 8 ||
+                !dto.Password.Any(char.IsUpper) ||
+                !dto.Password.Any(char.IsLower) ||
+                !dto.Password.Any(char.IsDigit) ||
+                !dto.Password.Any(ch => !char.IsLetterOrDigit(ch)))
+            {
+                throw new ArgumentException("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
+            }
+
             var existingUser = await _userRepository.GetByEmailAsync(dto.Email);
             if (existingUser != null)
-            {
-                throw new Exception("User with this email already exists.");
-            }
+                throw new InvalidOperationException("Ya existe un usuario con este correo electrónico.");
+
+            if (!Enum.TryParse<UserRole>(dto.Role, true, out var role))
+                throw new ArgumentException("El rol especificado no es válido.", nameof(dto.Role));
 
             var user = new User
             {
-                Username = dto.Username,
-                Email = dto.Email,
+                Username = dto.Username.Trim(),
+                Email = dto.Email.Trim().ToLower(),
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Role = Enum.Parse<UserRole>(dto.Role, true)
+                Role = role
             };
 
             await _userRepository.AddAsync(user);
-
-            return GenerateToken(user);
+            await _userRepository.SaveChangesAsync();
+            
+            return user;
         }
+
 
         public async Task<string> LoginAsync(LoginDto dto)
         {

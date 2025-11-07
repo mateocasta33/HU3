@@ -5,6 +5,7 @@ using school.Domain.Entities;
 
 namespace school.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class StudentsController : ControllerBase
