@@ -35,6 +35,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] Student student)
     {
         try
@@ -49,6 +50,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int id, [FromBody] Student student)
     {
         if (id != student.Id)
@@ -66,6 +68,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         try
@@ -80,4 +83,3 @@ public class StudentsController : ControllerBase
         }
     }
 }
-
