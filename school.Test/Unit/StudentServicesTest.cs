@@ -36,7 +36,7 @@ public class StudentServicesTest
 
         Assert.NotNull(result);
         Assert.Equal("juanperez", student.Username);
-        Assert.Equal("123456", student.Password);
+        Assert.Equal("123456", student.PasswordHash);
         Assert.Equal("juan@example.com", student.Email);
         Assert.Equal("Juan Pérez", student.FullName);
         Assert.Equal("3º ESO", student.Grade);

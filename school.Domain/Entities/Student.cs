@@ -1,5 +1,12 @@
-public class Student : User
+using school.Domain.Entities;
+
+public class Student
 {
+    public int Id { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
+    public UserRole Role { get; set; }
     public string FullName { get; set; } = string.Empty;
     public string Grade { get; set; } = string.Empty;
     public DateTime EnrollmentDate { get; set; } = DateTime.Now;
@@ -12,7 +19,7 @@ public class Student : User
     {
         Id = id;
         Username = username;
-        Password = password;
+        PasswordHash = password;
         Email = email;
         FullName = fullName;
         Grade = grade;

@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using school.Application.Interfaces;
 using school.Application.Services;
 using school.Domain.Interfaces;
 using school.Infrastructure.Data;

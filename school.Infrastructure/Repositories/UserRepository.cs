@@ -32,12 +32,20 @@ namespace school.Infrastructure.Repositories
         public async Task AddAsync(User user)
         {
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(User user)
         {
             _context.Users.Update(user);
+        }
+
+        public async Task DeleteAsync(User user)
+        {
+            _context.Users.Remove(user);
+        }
+
+        public async Task SaveChangesAsync()
+        {
             await _context.SaveChangesAsync();
         }
     }

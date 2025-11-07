@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using school.Application.Interfaces;
+using school.Domain.Entities;
 
 namespace school.Api.Controllers;
 

@@ -1,3 +1,5 @@
+using school.Domain.Entities;
+
 namespace school.Application.Interfaces;
 
 public interface IUserService 
