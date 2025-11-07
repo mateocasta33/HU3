@@ -5,6 +5,10 @@ namespace school.Domain.Entities
         public string TeacherName { get; set; }
         public string Specialty { get; set; }
 
+        public Teacher()
+        {
+            
+        }
         public Teacher(int id, string username, string password, string email, string teacherName, string specialty)
         {
             Id = id;
