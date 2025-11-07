@@ -59,7 +59,7 @@ public class TeacherService : ITeacherService
         existingTeacher.Email = teacher.Email;
         existingTeacher.TeacherName = teacher.TeacherName;
         existingTeacher.Specialty = teacher.Specialty;
-        existingTeacher.Password = teacher.Password;
+        existingTeacher.PasswordHash = teacher.PasswordHash;
 
         await _teacherRepository.Update(existingTeacher);
     }
