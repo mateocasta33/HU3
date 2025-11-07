@@ -65,7 +65,7 @@ public class UserService : IUserService
 
             existing.Username = user.Username;
             existing.Email = user.Email;
-            existing.Password = user.Password;
+            existing.PasswordHash = user.PasswordHash;
             existing.Role = user.Role;
 
             await _userRepository.UpdateAsync(existing);

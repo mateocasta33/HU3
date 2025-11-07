@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using school.Application.Interfaces;
 using school.Domain.Entities;
@@ -5,7 +6,8 @@ using school.Domain.Entities;
 namespace school.API.Controllers
 {
     [ApiController]
-    [Route("api/teacher")]
+    [Route("api/[controller]")]
+    [Authorize]
     public class TeacherController : ControllerBase
     {
         private readonly ITeacherService _teacherService;
