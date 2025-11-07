@@ -44,14 +44,28 @@ namespace school.Application.Services
         public async Task<string> LoginAsync(LoginDto dto)
         {
             var user = await _userRepository.GetByEmailAsync(dto.Email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+
+            Console.WriteLine($"[DEBUG] Login email: {dto.Email}");
+            Console.WriteLine($"[DEBUG] Found user: {(user != null ? user.Email : "NULL")}");
+            Console.WriteLine($"[DEBUG] Stored hash: {user?.PasswordHash}");
+
+            if (user == null)
             {
-                throw new Exception("Invalid credentials.");
+                throw new Exception($"User not found with email: {dto.Email}");
+            }
+
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
+            Console.WriteLine($"[DEBUG] Password valid: {isPasswordValid}");
+
+            if (!isPasswordValid)
+            {
+                throw new Exception("Password mismatch.");
             }
 
             return GenerateToken(user);
         }
 
+        
         private string GenerateToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
