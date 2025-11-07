@@ -24,16 +24,18 @@ namespace school.Infrastructure.Repositories
             return await _context.Students.FindAsync(id);
         }
 
-        public async Task Create(Student student)
+        public async Task<Student> Create(Student student)
         {
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
+            return student;
         }
 
-        public async Task Update(Student student)
+        public async Task<Student> Update(Student student)
         {
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
+            return student;
         }
 
         public async Task Delete(int id)

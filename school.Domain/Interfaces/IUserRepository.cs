@@ -1,13 +1,13 @@
-﻿using school.Domain.Entities;
+using school.Domain.Entities;
 
-namespace school.Domain.Interfaces
+namespace school.Domain.Interfaces;
+
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        Task<User?> GetByEmailAsync(string email);
-        Task<User?> GetByIdAsync(int id);
-        Task<IEnumerable<User>> GetAllAsync();
-        Task AddAsync(User user);
-        Task UpdateAsync(User user);
-    }
+    Task<IEnumerable<User>> GetAllAsync();
+    Task<User?> GetByIdAsync(int id);
+    Task AddAsync(User user);
+    Task UpdateAsync(User user);
+    Task DeleteAsync(User user);
+    Task SaveChangesAsync();
 }
