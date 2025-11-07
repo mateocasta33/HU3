@@ -19,6 +19,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 
+//inyeccion de dependencias 
+builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
+
 
 var app = builder.Build();
 
