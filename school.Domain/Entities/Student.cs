@@ -4,6 +4,10 @@ public class Student : User
     public string Grade { get; set; } = string.Empty;
     public DateTime EnrollmentDate { get; set; } = DateTime.Now;
 
+    public Student()
+    {
+        
+    }
     public Student(int id, string username, string password, string email, string fullName, string grade)
     {
         Id = id;
