@@ -23,22 +23,22 @@ namespace school.Application.Services
             return await _repository.GetById(id);
         }
 
-        public async Task Create(Student student)
+        public async Task<Student> Create(Student student)
         {
             var existing = await _repository.GetAll();
             if (existing.Any(s => s.Email == student.Email))
                 throw new Exception("El correo ya está registrado para otro estudiante");
 
-            await _repository.Create(student);
+            return await _repository.Create(student);
         }
 
-        public async Task Update(Student student)
+        public async Task<Student> Update(Student student)
         {
             var existing = await _repository.GetById(student.Id);
             if (existing == null)
                 throw new Exception("El estudiante no existe");
 
-            await _repository.Update(student);
+            return await _repository.Update(student);
         }
 
         public async Task Delete(int id)
