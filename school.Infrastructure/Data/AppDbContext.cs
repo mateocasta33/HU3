@@ -5,7 +5,7 @@ namespace school.Infrastructure.Data;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     
     public DbSet<User> Users { get; set; }
     public DbSet<Student> Students { get; set; }
@@ -16,7 +16,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<User>().ToTable("Users");
         modelBuilder.Entity<Student>().ToTable("Students");
         modelBuilder.Entity<Teacher>().ToTable("Teachers");
-
+        
         base.OnModelCreating(modelBuilder);
     }
 }

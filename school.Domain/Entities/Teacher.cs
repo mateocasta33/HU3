@@ -6,7 +6,7 @@ namespace school.Domain.Entities
         public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
-        public UserRole Role { get; set; }
+        public UserRole? Role { get; set; }
         public string TeacherName { get; set; }
         public string Specialty { get; set; }
 

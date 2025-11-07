@@ -16,7 +16,6 @@ namespace school.Api.Controllers
             _authService = authService;
         }
 
-        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
@@ -24,7 +23,6 @@ namespace school.Api.Controllers
             return Ok(new { token });
         }
 
-        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
