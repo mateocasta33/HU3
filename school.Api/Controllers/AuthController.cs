@@ -19,8 +19,8 @@ namespace school.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
-            var token = await _authService.RegisterAsync(dto);
-            return Ok(new { token });
+            var user = await _authService.RegisterAsync(dto);
+            return Ok(new { user });
         }
 
         [HttpPost("login")]

@@ -18,7 +18,6 @@ namespace school.Infrastructure.Repositories
         {
             return await _context.Students.ToListAsync();
         }
-
         public async Task<Student?> GetById(int id)
         {
             return await _context.Students.FindAsync(id);
